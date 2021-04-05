@@ -1,92 +1,56 @@
 package com.dari.filter;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.*;
-import java.security.cert.CertificateException;
-import java.sql.Date;
-import java.time.Instant;
+import com.dari.config.JwtProps;
 
-import static io.jsonwebtoken.Jwts.parser;
-import static java.util.Date.from;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtProvider {
 
-    private KeyStore keyStore;
-    @Value("${jwt.expiration.time}")
-    private Long jwtExpirationInMillis;
+	 public String extractUsername(String token) {
+	        return extractClaim(token, Claims::getSubject);
+	    }
 
-    @PostConstruct
-    public void init() {
-        try {
-            keyStore = KeyStore.getInstance("JKS");
-            InputStream resourceAsStream = getClass().getResourceAsStream("/Dari.jks");
-            keyStore.load(resourceAsStream, "secret".toCharArray());
-        } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
-            throw null ;
-        }
+	    public Date extractExpiration(String token) {
+	        return extractClaim(token, Claims::getExpiration);
+	    }
 
-    }
+	    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+	        final Claims claims = extractAllClaims(token);
+	        return claimsResolver.apply(claims);
+	    }
+	    private Claims extractAllClaims(String token) {
+	        return Jwts.parser().setSigningKey(JwtProps.SECRET).parseClaimsJws(token).getBody();
+	    }
 
-    public String generateToken(Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
-        return Jwts.builder()
-                .setSubject(principal.getUsername())
-                .setIssuedAt(from(Instant.now()))
-                .signWith(getPrivateKey())
-                .setExpiration(Date.from(Instant.now().plusMillis(jwtExpirationInMillis)))
-                .compact();
-    }
+	    private Boolean isTokenExpired(String token) {
+	        return extractExpiration(token).before(new Date());
+	    }
 
-    public String generateTokenWithUserName(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(from(Instant.now()))
-                .signWith(getPrivateKey())
-                .setExpiration(Date.from(Instant.now().plusMillis(jwtExpirationInMillis)))
-                .compact();
-    }
+	    public String generateToken(UserDetails userDetails) {
+	        Map<String, Object> claims = new HashMap<>();
+	        return createToken(claims, userDetails.getUsername());
+	    }
 
-    private PrivateKey getPrivateKey() {
-        try {
-            return (PrivateKey) keyStore.getKey("springblog", "secret".toCharArray());
-        } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
-            throw null ; 
-        }
-    }
+	    private String createToken(Map<String, Object> claims, String subject) {
 
-    public boolean validateToken(String jwt) {
-        parser().setSigningKey(getPublickey()).parseClaimsJws(jwt);
-        return true;
-    }
+	        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+	                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+	                .signWith(SignatureAlgorithm.HS256, JwtProps.SECRET).compact();
+	    }
 
-    private PublicKey getPublickey() {
-        try {
-            return keyStore.getCertificate("springblog").getPublicKey();
-        } catch (KeyStoreException e) {
-            throw null ;
-        }
-    }
-
-    public String getUsernameFromJwt(String token) {
-        Claims claims = parser()
-                .setSigningKey(getPublickey())
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
-    }
-
-    public Long getJwtExpirationInMillis() {
-        return jwtExpirationInMillis;
-    }
+	    public Boolean validateToken(String token, UserDetails userDetails) {
+	        final String username = extractUsername(token);
+	        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+	    }
 }

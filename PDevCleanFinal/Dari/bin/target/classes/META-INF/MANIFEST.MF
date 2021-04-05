@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: Dari
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: ASUS
+Implementation-Vendor-Id: com.Dari
+Build-Jdk: 1.8.0_261
+Implementation-URL: https://spring.io/projects/spring-boot/Dari
+Created-By: Maven Integration for Eclipse
+
