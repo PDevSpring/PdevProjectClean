@@ -66,6 +66,7 @@ public class UserController {
 			try {
 				authenticationManager.authenticate(
 						new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), new BCryptPasswordEncoder().encode(loginRequest.getPassword())));
+						
 			}
 			catch (BadCredentialsException e) {
 				throw new Exception("Incorrect username or password", e);
@@ -75,7 +76,7 @@ public class UserController {
 			final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
 
 			final String jwt = jwtProvider.generateToken(userDetails);
-
+			
 			return ResponseEntity.ok(new LoginResponse(jwt));
 		}
 	
