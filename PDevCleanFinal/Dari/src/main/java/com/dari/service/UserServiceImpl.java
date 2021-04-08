@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user); 
 		
 		String token=generateVerificationToken(user); 
-		mailSendService.sendEmail(user.getEmail(),"Please Click On The Link Bellow To Confirm : http://localhost:3000/App/Verif/"+token,"Please Confirm Your Account");
+		mailSendService.sendEmail(user.getEmail(),"Please Click On The Link Bellow To Confirm : http://localhost:3000/home/Verif/"+token,"Please Confirm Your Account");
 		
 		
 	}

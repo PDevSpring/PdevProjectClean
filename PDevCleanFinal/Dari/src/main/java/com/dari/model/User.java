@@ -1,6 +1,9 @@
 package com.dari.model;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,5 +33,12 @@ public class User {
 	private String image ; 
 	private Instant created;
 	private boolean enabled;
+	
+	  public List<String> getRoleList(){
+	        if(this.role.length() > 0){
+	            return Arrays.asList(this.role.split(","));
+	        }
+	        return new ArrayList<>();
+	    }
 
 }
