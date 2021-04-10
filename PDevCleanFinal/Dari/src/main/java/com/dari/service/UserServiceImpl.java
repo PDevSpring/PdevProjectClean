@@ -89,6 +89,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public String DeleteAccount(long id) {
+		userRepository.deleteById(id);
+		return "Deleted"; 
+	}
+	
+	/*@Override
 	public String UserLogin(String userName , String password) {
 		boolean state = false  ;
 		String who = null ; 
@@ -106,13 +112,9 @@ public class UserServiceImpl implements UserService {
 		
 		
 		return ("Hello" + who );    
-	}
+	}*/
 	
-	@Override
-	public String DeleteAccount(long id) {
-		userRepository.deleteById(id);
-		return "Deleted"; 
-	}
+	
 	
 
 }

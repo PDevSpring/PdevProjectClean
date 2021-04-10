@@ -14,7 +14,7 @@ public interface UserService  {
 
 	long getUserId(User user);
 
-	String UserLogin(String userName, String password);
+	//String UserLogin(String userName, String password);
 
 	String DeleteAccount(long id);
 	

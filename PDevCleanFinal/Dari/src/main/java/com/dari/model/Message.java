@@ -17,7 +17,7 @@ public class Message {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int MessageId ; 
+	private long MessageId ; 
 	
 	private String Subject ; 
 	private String Description ; 
