@@ -233,7 +233,7 @@ public class MailServiceImpl implements MailService {
 		helper.setTo(agent.getEmail());
 		helper.setSubject("Requestiong simulation /");
 		//helper.setText(buf);
-		helper.setText("hello "+user.getFirstName()+" here is your loan simulation file");
+		helper.setText("hello this is demande of loan of "+user.getFirstName()+" please review .");
 
 		//
 		
