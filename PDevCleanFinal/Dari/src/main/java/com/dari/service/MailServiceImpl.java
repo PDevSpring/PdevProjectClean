@@ -67,12 +67,12 @@ public class MailServiceImpl implements MailService {
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		StringBuilder buf = new StringBuilder();
 		//pdf file to string
-		buf.append("\"<html>\n" + "  <head>\n" + "    <meta name=\"viewport\" content=\"width=device-width\" />\n"
+		buf.append("<html>\n" + "  <head>\n" + "    <meta name=\"viewport\" content=\"width=device-width\" />\n"
 				+ "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n"
 				+ "    <title>Simple Transactional Email</title>\n" + "    <style>\n"
 				+ "      /* -------------------------------------\n" + "          GLOBAL RESETS\n"
 				+ "      ------------------------------------- */\n" + "      \n"
-				+ "      /*All the styling goes here*/\n" + "      \n" + "      img {\n" + "        border: none;\n"
+				+ "      /*All the styling goes here*/\n" + "      \n" + "     img {\n" + "        border: none;\n"
 				+ "        -ms-interpolation-mode: bicubic;\n" + "        max-width: 100%; \n" + "      }\n" + "\n"
 				+ "      body {\n" + "        background-color: #f6f6f6;\n" + "        font-family: sans-serif;\n"
 				+ "        -webkit-font-smoothing: antialiased;\n" + "        font-size: 14px;\n"
@@ -83,7 +83,7 @@ public class MailServiceImpl implements MailService {
 				+ "          font-family: sans-serif;\n" + "          font-size: 14px;\n"
 				+ "          vertical-align: top; \n" + "      }\n" + "\n"
 				+ "      /* -------------------------------------\n" + "          BODY & CONTAINER\n"
-				+ "      ------------------------------------- */\n" + "\n" + "      .body {\n"
+				+ "      ------------------------------------- */\n" + "\n" + ".aligncenter {text-align: center;}       .body {\n"
 				+ "        background-color: #f6f6f6;\n" + "        width: 100%; \n" + "      }\n" + "\n"
 				+ "      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */\n"
 				+ "      .container {\n" + "        display: block;\n" + "        margin: 0 auto !important;\n"
@@ -185,14 +185,13 @@ public class MailServiceImpl implements MailService {
 				+ "      <tr>\n" + "        <td>&nbsp;</td>\n" + "        <td class=\"container\">\n"
 				+ "          <div class=\"content\">\n" + "\n" + "            <!-- START CENTERED WHITE CONTAINER -->\n"
 				+ "            <table role=\"presentation\" class=\"main\">\n"
-				+ "                    <img src="+"D:/Design/Nouveau_dossier/dari_tn_logo.jpg"+"alt="+"dari_tn_logo"+"style="+"width:300px"+"></a>\n" + "\n"
-
+				+ "                    <p class=\"aligncenter\"><img src=\"https://i.pinimg.com/564x/39/1a/e4/391ae431bdf6609ea4b65ed2fa879a48.jpg\" width=\"104\" height=\"40\"></p>" + "\n"
 				+ "              <!-- START MAIN CONTENT AREA -->\n" + "              <tr>\n"
 				+ "                <td class=\"wrapper\">\n"
 				+ "                  <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n"
 				+ "                    <tr>\n" + "                      <td>\n"
-				+ "                        <p>Bonjour Monsieur ,</p>\n"
-				+ "                        <p>Vous avez une demande de crédit .</p>\n"
+				+ "                        <p>Hello sir,</p>\n"
+				+ "                        <p>You have a new credit demande .</p>\n"
 				+ "                        <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"btn btn-primary\">\n"
 				+ "                          <tbody>\n" + "                            <tr>\n"
 				+ "                              <td align=\"left\">\n"
@@ -200,13 +199,15 @@ public class MailServiceImpl implements MailService {
 				+ "                                  <tbody>\n" + "                                  </tbody>\n"
 				+ "                                </table>\n" + "                              </td>\n"
 				+ "                            </tr>\n" + "                          </tbody>\n"
-				+ "                        </table>\n" + "<p>Nous essperons que vous portez bien ! </p>\n"                       
-				+ "                        <p>Nous avons maintenant le plaisir de vous informer que vous avez une demande identifié par, "
-				+ user.getUserName() + " de notre client Mr " + user.getFirstName() +" "+user.getLastName()+ " et vous trouvez le releve de simulation ci-join !!</p>\n"
-				+ "                        <p>S'il vous voulais le répondre cliquer sur ce lien : .</p>\n"
-				+ "                      <h5>lien ici ************************************ " + "</h5>"
-				+ "                        <p>Cordialement.</p>\n"
-				+ "                        <p>Bonne journnée! DARI IMMOBILIER Group.</p>\n"
+				+ "                        </table>\n" + "<p>We hope you are doing well ! </p>\n"                       
+				+ "                        <p>We are now pleased to inform you that you have a request identified by, "
+				+ user.getUserName() + " from our client Mr" + 
+						" " + user.getFirstName() +" "+user.getLastName()+ " and you find the attached simulation report </p>\n"
+				+ "                        <p>If you wanted to answer it click on this link: .</p>\n"
+				+ "                      <h5>link <a href=\\\"http://htmlemail.io\\\">Confirm</a>  " + "</h5>"
+				+ "                      <h5>link <a href=\\\"http://htmlemail.io\\\">Unconfirm</a>" + "</h5>"
+				+ "                        <p>Thanks.</p>\n"
+				+ "                        <p>Have a good day! DARI IMMOBILIER Group.</p>\n"
 				+ "                      </td>\n" + "                    </tr>\n" + "                  </table>\n"
 				+ "                </td>\n" + "              </tr>\n" + "\n"
 				+ "            <!-- END MAIN CONTENT AREA -->\n" + "            </table>\n"
@@ -220,8 +221,8 @@ public class MailServiceImpl implements MailService {
 				+ "                    Powered by <a href=\"http://htmlemail.io\">HTMLemail</a>.\n"
 				+ "                  </td>\n" + "                </tr>\n" + "              </table>\n"
 				+ "            </div>\n" + "            <!-- END FOOTER -->\n" + "\n" + "          </div>\n"
-				+ "        </td>\n" + "        <td>&nbsp;</td>\n" + "      </tr>\n" + "    </table>\n" + "  </body>\n"
-				+ "</html>\"");
+				+ "        </td>\n" + "        <td>&nbsp;</td>\n" + "      </tr>\n" + "    </table>\n" + "  </body>\n</html>"
+				);
 		
 		
 		
@@ -232,8 +233,8 @@ public class MailServiceImpl implements MailService {
 		//
 		helper.setTo(agent.getEmail());
 		helper.setSubject("Requestiong simulation /");
-		//helper.setText(buf);
-		helper.setText("hello this is demande of loan of "+user.getFirstName()+" please review .");
+		helper.setText(messaage, messaage);
+		//helper.setText("hello "+user.getFirstName()+" here is your loan simulation file");
 
 		//
 		

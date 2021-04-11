@@ -18,7 +18,8 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
+
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -79,6 +80,12 @@ public class PdfServiceImpl implements PdfService {
 		
 		Paragraph bank = new Paragraph(simulation.getBank().getNamebank(), subFont);
 		bank.setAlignment(Element.ALIGN_LEFT);
+		
+		Image imgBank = null;
+			imgBank = Image.getInstance("C:\\Users\\pc rog\\Desktop\\2x\\dari.png");
+		
+		imgBank.setAbsolutePosition(260, 767);
+		imgBank.scalePercent(10);
 		
 		// espaceee
 		Paragraph espace = new Paragraph(" ", subFont);
@@ -244,6 +251,7 @@ public class PdfServiceImpl implements PdfService {
 						
 				my_pdf_report.add(bank);
 				my_pdf_report.add(dateStr);
+				my_pdf_report.add(imgBank);
 			
 				my_pdf_report.add(espace);
 
