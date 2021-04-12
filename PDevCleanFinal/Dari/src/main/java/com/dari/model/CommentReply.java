@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +23,10 @@ public class CommentReply {
 	private String Description ; 
 	private int LikesNb ; 
 	private int DislikeNb ; 
+	private boolean Blocked;
+	@ManyToOne
+	private Comment  comment;
+	@ManyToOne
+	private User user;
 
 }
