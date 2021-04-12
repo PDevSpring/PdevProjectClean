@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: Dari
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: pc rog
+Built-By: lenovo
 Implementation-Vendor-Id: com.Dari
 Build-Jdk: 1.8.0_60
 Implementation-URL: https://spring.io/projects/spring-boot/Dari

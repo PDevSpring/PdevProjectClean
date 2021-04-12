@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +23,7 @@ public class Ads {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long AdID ; 
+	private long adID ; 
 	
 	private String Object ; 
 	private String Description ; 
@@ -33,7 +36,7 @@ public class Ads {
 	private int Surface ; 
 	private int BalconiesNb ; 
 	private int GaragesNb ;
-	private int Price ; 
+	private float Price ; 
 	
 	private Boolean AirConditioner ; 
 	private Boolean Heater ; 
@@ -41,8 +44,26 @@ public class Ads {
 	private Boolean Garden ; 
 	private Boolean Furnished ;
 	
-	private String type ;
+	private int LikesNB;
+	private int DislikeNB;
+    
 
+	public Ads get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Enumerated (EnumType.STRING)
+	private Typeads kindofgood;
+	
+	@Enumerated (EnumType.STRING)
+	private location locationofgood; 
+	
+	@OneToOne
+	private User user;
+	
+	
+	
 }
 
 		
