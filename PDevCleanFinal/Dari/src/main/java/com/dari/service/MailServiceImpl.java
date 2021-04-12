@@ -30,6 +30,26 @@ public class MailServiceImpl implements MailService {
 
 	}
 	
+	public void Sendd(String toEmail,String Subject,String Body) throws MailException {
+
+		/*
+		 * This JavaMailSender Interface is used to send Mail in Spring Boot.
+		 * This JavaMailSender extends the MailSender Interface which contains
+		 * send() function. SimpleMailMessage Object is required because send()
+		 * function uses object of SimpleMailMessage as a Parameter
+		 */
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(toEmail);
+		mail.setFrom("daritn9@gmail.com");
+		mail.setSubject(Subject);
+		mail.setText(Body);
+
+		
+		javaMailSender.send(mail);
+	}
+
+	
 	@Override
 	public void Send(User user) throws MailException {
 
