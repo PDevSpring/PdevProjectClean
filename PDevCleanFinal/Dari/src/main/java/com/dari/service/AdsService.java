@@ -24,4 +24,15 @@ public interface AdsService {
 
 	int nbrdislike();
 
+	Ads Incrementlikes(Long idad);
+
+	Ads Incrementdislikes(Long idad);
+
+	Ads findbyid(Long idad);
+
+	int getnblikes(Long idad);
+
+	int getnbdislikes(Long idad);
+
+
 }

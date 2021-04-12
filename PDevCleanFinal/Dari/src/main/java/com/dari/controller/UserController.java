@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dari.model.User;
+import com.dari.repository.UserRepository;
 import com.dari.service.UserService;
 
 
@@ -20,6 +21,8 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService ;
+	@Autowired
+	private UserRepository userRepository ; 
 
 	
 	@GetMapping("/adminArea/registerAdmin")
@@ -40,9 +43,15 @@ public class UserController {
 		return userService.DeleteAccount(userid) ; 
 	}
 	
-	@GetMapping("/clientArea/profil")
+	@GetMapping("/profil")
 	public String wlc() {
 		return "welcome To Your Profil ! " ; 
+	}
+	
+	@GetMapping("/profil/search")
+	public User findUser(String username) {
+	User user = userRepository.findByUserName(username); 
+	return user ; 
 	}
 	
 	

@@ -17,7 +17,7 @@ import com.dari.model.Fourniture;
 import com.dari.service.FournitureService;
 
 @RestController
-@RequestMapping("/Four")
+@RequestMapping("/App/Four")
 public class FournitureController {
 	
 	

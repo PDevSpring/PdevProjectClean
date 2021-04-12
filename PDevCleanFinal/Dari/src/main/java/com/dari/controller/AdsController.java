@@ -18,7 +18,7 @@ import com.dari.model.Ads;
 import com.dari.service.AdsService;
 
 @RestController
-@RequestMapping("/Ads")
+@RequestMapping("/App/Ads")
 public class AdsController {
 	
 	@Autowired
@@ -30,21 +30,74 @@ public class AdsController {
 	  }
     
 	@PostMapping ("/newad")
+	@ResponseBody
 	Ads newad (@RequestBody Ads newad) {
 		return adService.addnewad(newad);
 	}
 	
-	@DeleteMapping("/ad/{ID}")
-	void deletead (@PathVariable long adID) {
+	@DeleteMapping("/deletead/{ID}")
+	@ResponseBody
+	public void DeleteAd (@PathVariable("ID") Long adID) {
 		adService.deleteAdsByID(adID);
 	}
 	
-	@PutMapping("/ad/{id}")
+	@PutMapping("/updatead/{id}")
 	@ResponseBody
 	public Ads updatead (@RequestBody Ads ad) {
 	return adService.updatead(ad);
 	}
 	
+	@GetMapping("/findad/{id}")
+	@ResponseBody
+	public Ads Findbyid (@PathVariable("id") Long adId) {
+		return  adService.findbyid(adId);
+	}
+	
+	
+	
+	@PutMapping("/incLikesad/{id}")
+	@ResponseBody
+	public Ads IncrLikes(@PathVariable("id") Long adId) {
+		return adService.Incrementlikes(adId);
+	}
+	
+	
+	@PutMapping("/incDislikesad/{id}")
+	@ResponseBody
+	public Ads IncrDislikes(@PathVariable("id") Long adId) {
+		return adService.Incrementdislikes(adId);
+	}
+	
+	@GetMapping("/getlike/{id}")
+	@ResponseBody
+	  public int getlikesad(@PathVariable("id") Long adId) {
+	    return adService.getnblikes(adId);
+	  }
+	
+	@GetMapping("/getdislike/{id}")
+	@ResponseBody
+	  public int getdislikesad(@PathVariable("id") Long adId) {
+	    return adService.getnbdislikes(adId);
+	  }
+	
+	@GetMapping("/getmostliked")
+	@ResponseBody
+	  public int getmostliked() {
+	    return adService.mostlikedadd();
+	  }
+	
+	@GetMapping("/getallliked")
+	@ResponseBody
+	  public int nbrlike() {
+	    return adService.nbrlike();
+	  }
+	
+	@GetMapping("/getalldisliked")
+	@ResponseBody
+	  public int nbrdislike() {
+	    return adService.nbrdislike();
+	  }
+
 
 	  
 
