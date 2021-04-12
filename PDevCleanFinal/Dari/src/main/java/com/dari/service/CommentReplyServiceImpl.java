@@ -90,9 +90,9 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 
 		for (CommentReply aa : commentsrep) {
 			if (aa.getReplyId() == idCom) {
-				A = commentreplyRepository.findById(idCom).get().getDislikesNb();
+				A = commentreplyRepository.findById(idCom).get().getDislikeNb();
 				A++;
-				aa.setDislikesNb(A);
+				aa.setDislikeNb(A);
 			}
 			commentreplyRepository.save(aa);
 		}
@@ -150,9 +150,9 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 
 		for (CommentReply aa : commentsrep) {
 			if (aa.getReplyId() == idCom) {
-				A = commentreplyRepository.findById(idCom).get().getDislikesNb();
+				A = commentreplyRepository.findById(idCom).get().getDislikeNb();
 				A--;
-				aa.setDislikesNb(A);
+				aa.setDislikeNb(A);
 			}
 			commentreplyRepository.save(aa);
 		}

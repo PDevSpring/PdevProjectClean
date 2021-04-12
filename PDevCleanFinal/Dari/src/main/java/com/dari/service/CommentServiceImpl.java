@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dari.model.Comment;
-import com.dari.model.FilterService;
+import com.dari.service.FilterService;
 import com.dari.model.Notification;
 import com.dari.repository.AdsRepository;
 import com.dari.repository.CommentRepository;
