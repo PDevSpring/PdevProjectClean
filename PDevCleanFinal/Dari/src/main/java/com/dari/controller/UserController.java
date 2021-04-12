@@ -3,8 +3,11 @@ package com.dari.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +28,7 @@ public class UserController {
 	private UserRepository userRepository ; 
 
 	
-	@GetMapping("/adminArea/registerAdmin")
+	@PostMapping("/adminArea/registerAdmin")
 	public String RegisterAdmin(@RequestBody User user) {
 		userService.addAdmin(user);
 		return "RegistrationDone! "; 
@@ -37,10 +40,9 @@ public class UserController {
 		return users ; 
 	}
 	
-	@GetMapping("/adminArea/Delete")
-	public String DeleteUser(@RequestBody User user) {
-		long userid =  userService.getUserId(user) ; 
-		return userService.DeleteAccount(userid) ; 
+	@DeleteMapping("/adminArea/Delete/{id}")
+	public String DeleteUser(@PathVariable long id) { 
+		return userService.DeleteAccount(id) ; 
 	}
 	
 	@GetMapping("/profil")
@@ -49,9 +51,17 @@ public class UserController {
 	}
 	
 	@GetMapping("/profil/search")
-	public User findUser(String username) {
+	public User findUser(@RequestBody String username) {
 	User user = userRepository.findByUserName(username); 
-	return user ; 
+	if (user.getRole().equals("Client")) {
+		return user ;
+	}
+	else return null  ; 
+	}
+	
+	@PutMapping("/profil/change/{id}")
+	public String updateAccount(@PathVariable long id,@RequestBody User user) {
+		return userService.UpdateAccount(id, user); 
 	}
 	
 	

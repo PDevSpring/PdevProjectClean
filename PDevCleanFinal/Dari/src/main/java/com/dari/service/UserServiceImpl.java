@@ -94,6 +94,13 @@ public class UserServiceImpl implements UserService {
 		return "Deleted"; 
 	}
 	
+	@Override
+	public String UpdateAccount(long id,User user) {
+		userRepository.save(user);
+		return "Updated"; 
+	}
+	
+	
 	/*@Override
 	public String UserLogin(String userName , String password) {
 		boolean state = false  ;

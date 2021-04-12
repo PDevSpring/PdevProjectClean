@@ -4,8 +4,10 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ public class MessagesController {
 	@Autowired
 	private MessagesService messagesService ; 
 	
-	@GetMapping("/sendTo")
+	@PostMapping("/sendTo")
 	public String sending(@RequestHeader String Authorization ,@RequestBody Message message) {
 		String token = Authorization.replaceFirst("Bearer ", "");
 		messagesService.sendMessage(token, message);
@@ -35,7 +37,7 @@ public class MessagesController {
 		return (Message) messages ; 
 	}
 	
-	@GetMapping("/Messages/Delete/{id}")
+	@DeleteMapping("/Messages/Delete/{id}")
 	public String Delete(@PathVariable long id) {
 		messagesService.deleteMessage(id);
 		return "Message Deleted";
