@@ -4,18 +4,22 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.dari.model.Appointment;
+import com.dari.model.User;
+import com.dari.repository.AdsRepository;
 import com.dari.repository.AppointmentRepository;
 import com.dari.repository.UserRepository;
 
-
+@Service
 public class AppointmentServiceImpl implements AppointmentService{
 	@Autowired
 	AppointmentRepository apprepository;
 	@Autowired
 	UserRepository userrepository;
-	
+	@Autowired
+	AdsRepository adrepository;
 	
 	@Override
 	public List<Appointment> retrieveAllAppointment() {
@@ -24,8 +28,10 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 	
 	@Override
-	public Appointment addAppointment(Appointment a,Date date) {
+	public Appointment addAppointment(Appointment a,Long idAd) {
+		User usr= adrepository.findByAdID(idAd).getUser();
 		List<Appointment> app=(List<Appointment>) apprepository.findAll();
+		a.setUser(usr);
 
 		for(Appointment aa:app) {
 		
@@ -49,9 +55,9 @@ public class AppointmentServiceImpl implements AppointmentService{
 	
 	
 	@Override
-	public void deleteAppointment(String id) {
+	public void deleteAppointment(Long id) {
 		
-		apprepository.deleteById(Long.parseLong(id));		
+		apprepository.deleteById(id);		
 
 		
 	}

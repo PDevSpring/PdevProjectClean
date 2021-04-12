@@ -9,8 +9,11 @@ public interface AppointmentService {
 
 	List<Appointment> retrieveAllAppointment();
 
-	Appointment addAppointment(Appointment a, Date date);
 
-	void deleteAppointment(String id);
+	void deleteAppointment(Long id);
+
+
+
+	Appointment addAppointment(Appointment a, Long idAd);
 
 }

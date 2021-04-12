@@ -24,15 +24,15 @@ package com.dari.model;
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private long AppointmentId ; 
 		@Temporal(TemporalType.DATE)
-		private Date date ; 
-		private String WhithWho ; 
+		private Date date ;  
 		private String state;
 		private int Heure;
 		private String Attendance;
 		
 		@ManyToOne
 		private User user;
-		
+		@ManyToOne
+		private Ads ad;
 	}
 
 

@@ -19,7 +19,7 @@ public class AdsServiceImpl implements AdsService {
 	
 
 	
-	
+	@Override
 	public Ads updatead (Ads ad) {
 		return adsrepository.save (ad);
 		
@@ -35,6 +35,12 @@ public class AdsServiceImpl implements AdsService {
 	public List<Ads> findAllad() {
 		List<Ads> ad = (List<Ads>) adsrepository.findAll();
 		return ad;
+	}
+	
+	@Override
+	public Ads findbyid(Long idad)
+	{
+		return adsrepository.findById(idad).get();
 	}
 
 	@Override
@@ -53,6 +59,32 @@ public class AdsServiceImpl implements AdsService {
 		return nb;
 	}
 	
+	@Override 
+	public int nbrdislike() {
+		int nb=0;
+		List<Ads> list= (List<Ads>) adsrepository.findAll();
+		for (Ads ad: list){
+			nb+=ad.getDislikeNB();
+		}
+		return nb;
+	}
+	
+	
+	@Override
+	public int getnblikes(Long idad)
+	{	int a;
+	Ads ad=adsrepository.findById(idad).get();
+		return a=ad.getLikesNB();
+		}
+	@Override
+	public int getnbdislikes(Long idad)
+	{	int a;
+	Ads ad=adsrepository.findById(idad).get();
+		return a=ad.getDislikeNB();
+		}
+	
+	
+	@Override
 	public int mostlikedadd() {	
 		int k=0;
 		List<Ads> list= (List<Ads>) adsrepository.findAll();
@@ -67,16 +99,30 @@ public class AdsServiceImpl implements AdsService {
 
 	}
 	
-	@Override 
-	public int nbrdislike() {
-		int nb=0;
-		List<Ads> list= (List<Ads>) adsrepository.findAll();
-		for (Ads ad: list){
-			nb+=ad.getDislikeNB();
-		}
-		return nb;
+	
+	
+	@Override
+	public Ads Incrementlikes(Long idad)
+	{	int a;
+	Ads ad=adsrepository.findById(idad).get();
+		a=ad.getLikesNB();
+		a++;
+		ad.setLikesNB(a);
+		adsrepository.save(ad);
+		return ad;
+	}
+	@Override
+	public Ads Incrementdislikes(Long idad)
+	{	int a;
+	Ads ad=adsrepository.findById(idad).get();
+		a=ad.getDislikeNB();
+		a++;
+		ad.setDislikeNB(a);
+		adsrepository.save(ad);
+		return ad;
 	}
 	
+
 	 
 	
 

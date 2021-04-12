@@ -39,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().sessionManagement()
+		httpSecurity.cors().and().csrf().disable();
+	/*	httpSecurity.csrf().disable().sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and()
 				.authorizeRequests()
@@ -49,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.anyRequest().authenticated().and().
 						exceptionHandling();
 		httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
+*/
 	}
     @Bean
     public PasswordEncoder passwordEncoder() {
