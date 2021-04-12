@@ -1,9 +1,12 @@
 package com.dari.model;
 
+import java.time.Instant;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,9 +20,18 @@ public class Notification {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long NotificationId ; 
+	private long NotificationId ;
 	
-	private String Description ; 
+	private String message;
 	
+	
+	private Instant createdAt;
+	
+	
+	@ManyToOne
+	private User user;
+	
+	@ManyToOne
+	private Ads ads;
 
 }

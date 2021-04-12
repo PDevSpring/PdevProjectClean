@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dari.service.FilterAdsService;
 import com.dari.model.Ads;
+import com.dari.model.Typeads;
 
 @RestController
-@RequestMapping("/App")
+@RequestMapping("/App1")
 public class FilterAdsController {
 
 	@Autowired 
@@ -25,4 +26,26 @@ public class FilterAdsController {
 		List<Ads> list = filterAdsService.FilterLocation(loc);
 		return list ;
 	}
+	
+	@GetMapping("/Type/{type}")
+	
+	List<Ads> FilterbyType(@PathVariable("type") Typeads type  ){
+		List<Ads> list = filterAdsService.FilterType(type);
+		return list ;
+	}
+	
+	@GetMapping("/price/{prix}")
+	
+	List<Ads> FilterPrices(@PathVariable("prix") float p  ){
+		List<Ads> list = filterAdsService.FilterByPrice(p);
+		return list ;
+	}
+	
+	@GetMapping("/Nbrooms/{nb}")
+	
+	List<Ads> FilterPrices(@PathVariable("nb") int nb  ){
+		List<Ads> list = filterAdsService.FilterByNumber(nb);
+		return list ;
+	
 }
+	}

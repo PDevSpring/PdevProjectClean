@@ -48,10 +48,7 @@ public class Ads {
 	private int DislikeNB;
     
 
-	public Ads get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 	@Enumerated (EnumType.STRING)
 	private Typeads kindofgood;
