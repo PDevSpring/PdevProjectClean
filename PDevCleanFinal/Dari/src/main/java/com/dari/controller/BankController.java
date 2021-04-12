@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @RestController
-@RequestMapping ("/Bank")
+@RequestMapping ("/App/Bank")
 public class BankController {
 
 	

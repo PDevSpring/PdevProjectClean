@@ -18,7 +18,7 @@ import com.dari.model.Ads;
 import com.dari.service.AdsService;
 
 @RestController
-@RequestMapping("/Ads")
+@RequestMapping("/App/Ads")
 public class AdsController {
 	
 	@Autowired
