@@ -9,7 +9,6 @@ public interface CommentReplyService {
 
 	List<CommentReply> getallcomrep();
 
-	void addComrep(CommentReply c);
 
 	void deletecomrepById(Long comId);
 
@@ -24,6 +23,8 @@ public interface CommentReplyService {
 	boolean DecremDislikerep(Long idCom);
 
 	boolean IncremDislikerep(Long idCom);
+
+	void addComrep(CommentReply c, long comid);
 
 	
 

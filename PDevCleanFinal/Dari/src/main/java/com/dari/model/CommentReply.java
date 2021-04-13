@@ -29,4 +29,5 @@ public class CommentReply {
 	@ManyToOne
 	private User user;
 
+	
 }

@@ -8,7 +8,7 @@ import com.dari.model.CommentReply;
 
 public interface CommentService {
 
-	void addCom(Comment c);
+	
 
 	void deletecomById(Long comId);
 	
@@ -29,6 +29,8 @@ public interface CommentService {
 	boolean DecremLike(Long idCom);
 
 	boolean DecremDislike(Long idCom);
+
+	void addCom(Comment c, long adid);
 
 
 

@@ -30,9 +30,9 @@ public class CommentReplyController {
 		List<CommentReply> comrep = commentreplyService.getallcomrep() ; 
 		return comrep ; 
 	}
-	@PostMapping("/addcomrep") 
-	public String addingcomrep(@RequestBody CommentReply c) {
-		commentreplyService.addComrep(c);
+	@PostMapping("/addcomrep/{idcom}") 
+	public String addingcomrep(@RequestBody CommentReply c,@PathVariable("idcom") Long comId) {
+		commentreplyService.addComrep(c,comId);
 		return "Comment added!"; 
 	}
 	
@@ -54,6 +54,34 @@ public class CommentReplyController {
 	public void BlockCommentsrep(@PathVariable long comId)  {
 		 commentreplyService.Blockcommentsrep(comId);
 	}
+	
+	@PutMapping(value = "/inclike/{comId}")
+	@ResponseBody
+	public boolean inclike(@PathVariable long comId)  {
+		 return commentreplyService.IncremLike(comId);
+	}
+	
+	@PutMapping(value = "/incdislike/{comId}")
+	@ResponseBody
+	public boolean incdislike(@PathVariable long comId)  {
+		 return commentreplyService.IncremDislikerep(comId);
+	}
+	
+	
+	@PutMapping(value = "/declike/{comId}")
+	@ResponseBody
+	public boolean declike(@PathVariable long comId)  {
+		 return commentreplyService.DecremLikerep(comId);
+	}
+	
+	@PutMapping(value = "/decdislike/{comId}")
+	@ResponseBody
+	public boolean decdislike(@PathVariable long comId)  {
+		 return commentreplyService.DecremDislikerep(comId);
+	}
+	
+	
+	
 }
 	
 

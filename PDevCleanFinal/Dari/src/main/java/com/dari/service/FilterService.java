@@ -89,7 +89,7 @@ public class FilterService {
 			// will still function normally otherwise - it just won't censor any
 			// swear words.)
 
-			FileReader fr = new FileReader("C:\\Users\\MAYSA\\Desktop\\BadWords.txt");
+			FileReader fr = new FileReader("C:/Users/pc rog/Desktop/BadWords.txt");
 			BufferedReader reader = new BufferedReader(fr);
 			System.out.println("file "+reader);
 			// BufferedReader reader = new BufferedReader(new

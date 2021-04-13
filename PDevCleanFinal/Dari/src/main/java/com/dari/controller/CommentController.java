@@ -39,9 +39,9 @@ public class CommentController {
 	}
 	
 	//localhost:3000/SpringMVC/servlet/comment/addcom
-	@PostMapping("/addcom") 
-	public String addingcom(@RequestBody Comment c) {
-		commentService.addCom(c);
+	@PostMapping("/addcom/{adid}") 
+	public String addingcom(@RequestBody Comment c,@PathVariable("adid") Long adId) {
+		commentService.addCom(c,adId);
 		return "Comment added!"; 
 	}
 	/*{
@@ -73,6 +73,33 @@ public class CommentController {
 	public String BlockComments(@PathVariable long comId)  {
 		 return commentService.Blockcomments(comId);
 	}
+	
+	@PutMapping(value = "/inclike/{comId}")
+	@ResponseBody
+	public boolean inclike(@PathVariable long comId)  {
+		 return commentService.IncremLike(comId);
+	}
+	
+	@PutMapping(value = "/incdislike/{comId}")
+	@ResponseBody
+	public boolean incdislike(@PathVariable long comId)  {
+		 return commentService.IncremDislike(comId);
+	}
+	
+	
+	@PutMapping(value = "/declike/{comId}")
+	@ResponseBody
+	public boolean declike(@PathVariable long comId)  {
+		 return commentService.DecremLike(comId);
+	}
+	
+	@PutMapping(value = "/decdislike/{comId}")
+	@ResponseBody
+	public boolean decdislike(@PathVariable long comId)  {
+		 return commentService.DecremDislike(comId);
+	}
+	
+	
 	
 	
 	

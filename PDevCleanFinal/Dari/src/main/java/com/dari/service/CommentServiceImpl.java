@@ -1,11 +1,13 @@
 package com.dari.service;
 
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dari.model.Ads;
 import com.dari.model.Comment;
 import com.dari.service.FilterService;
 import com.dari.model.Notification;
@@ -35,10 +37,13 @@ public class CommentServiceImpl implements CommentService {
 	
 	
 	@Override
-	public void addCom (Comment c) {
+	public void addCom (Comment c,long adid) {
+		Ads ad =adsrepository.findById(adid).get();
+		System.out.println(ad.getPrice());
+		c.setAds(ad);
 		commentRepository.save(c);
-		
 		Notification n = new Notification();
+		n.setCreatedAt(Instant.now());
 		n.setUser(c.getAds().getUser());
 		//n.setCreatedAt(new Date());
 		n.setMessage("New comment added from "+c.getAds().getUser().getFirstName());

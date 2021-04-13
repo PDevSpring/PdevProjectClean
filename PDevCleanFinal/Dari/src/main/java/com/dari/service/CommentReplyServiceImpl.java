@@ -10,6 +10,7 @@ import com.dari.model.CommentReply;
 import com.dari.model.Notification;
 import com.dari.repository.AdsRepository;
 import com.dari.repository.CommentReplyRepository;
+import com.dari.repository.CommentRepository;
 import com.dari.repository.NotificationRepository;
 
 @Service
@@ -18,6 +19,8 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 	@Autowired 
 	private CommentReplyRepository commentreplyRepository; 
 	
+	@Autowired
+	private CommentRepository comrepository;
 	
 	
 	@Autowired
@@ -33,7 +36,9 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 	
 	
 	@Override
-	public void addComrep (CommentReply c) {
+	public void addComrep (CommentReply c,long comid) {
+		Comment com=comrepository.findById(comid).get();
+		c.setComment(com);
 		commentreplyRepository.save(c);
 		
 		Notification n = new Notification();
