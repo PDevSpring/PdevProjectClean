@@ -15,11 +15,16 @@ import com.dari.service.SellAndRentService;
 
 
 @RestController
-@RequestMapping("/SellAndRent")
+@RequestMapping("App/SellAndRent")
 public class SellAndRentController {
 
 		@Autowired
 		private SellAndRentService sellAndRentService; 
+		
+		@GetMapping("/test")
+		public String test() {
+			return "working fine ! " ; 
+		}
   
   @GetMapping("/sellAds")
   @ResponseBody 

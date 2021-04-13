@@ -21,6 +21,12 @@ public class AppointmentControler {
 
 	@Autowired AppointmentService appservice;
 	
+	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
+	
 	@GetMapping("/allapps")
 	  List<Appointment> all() {
 	    return (List<Appointment>) appservice.retrieveAllAppointment();

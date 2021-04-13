@@ -50,6 +50,11 @@ public class LoansController {
 	@Autowired
 	LoansRepository loanrepository;
 	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
+	
 	//autowired mail
 	
 	//simulate a loan

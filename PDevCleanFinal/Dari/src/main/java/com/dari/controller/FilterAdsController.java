@@ -12,11 +12,16 @@ import com.dari.service.FilterAdsService;
 import com.dari.model.Ads;
 
 @RestController
-@RequestMapping("/App")
+@RequestMapping("/App/filterads")
 public class FilterAdsController {
 
 	@Autowired 
 	FilterAdsService filterAdsService;
+	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
 	
 	
 	@GetMapping("/Location/{loc}")

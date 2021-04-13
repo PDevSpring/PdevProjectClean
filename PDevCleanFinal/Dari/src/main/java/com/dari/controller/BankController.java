@@ -39,6 +39,11 @@ public class BankController {
 	private BankService bankService ; 
 	
 		//zid delete agent
+	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
 
 	//http://localhost:3000/SpringMVC/servlet/Bank/addagent
 	@PostMapping("/addagent/{bankId}")

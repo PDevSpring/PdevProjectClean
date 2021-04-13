@@ -18,8 +18,13 @@ import com.dari.model.CommentReply;
 import com.dari.service.CommentReplyService;
 
 @RestController
-@RequestMapping ("/commentrep")
+@RequestMapping ("/App/ads/commentrep")
 public class CommentReplyController {
+	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
 	
 	@Autowired
 	private CommentReplyService commentreplyService;

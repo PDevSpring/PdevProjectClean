@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping ("/comment")
+@RequestMapping ("/App/ads/comment")
 public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
 	
 	
 	@GetMapping("/getallcom")

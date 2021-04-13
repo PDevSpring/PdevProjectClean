@@ -23,6 +23,11 @@ public class FournitureController {
 	
 	@Autowired
 	private	FournitureService fourservice;
+	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
 
 	
 	@PostMapping("/addfour")
