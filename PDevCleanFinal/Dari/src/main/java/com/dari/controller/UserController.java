@@ -40,6 +40,13 @@ public class UserController {
 		return users ; 
 	}
 	
+	
+	@GetMapping("/adminArea/all")
+	public User showbyuser(@RequestBody String username) {
+		User user = userRepository.findByUserName(username); 
+		return user ; 
+	}
+	
 	@DeleteMapping("/adminArea/Delete/{id}")
 	public String DeleteUser(@PathVariable long id) { 
 		return userService.DeleteAccount(id) ; 
@@ -62,6 +69,11 @@ public class UserController {
 	@PutMapping("/profil/change/{id}")
 	public String updateAccount(@PathVariable long id,@RequestBody User user) {
 		return userService.UpdateAccount(id, user); 
+	}
+	
+	@GetMapping("/profil/logout")
+	public String Logout() {
+		return "Logged out From Account ! ";
 	}
 	
 	

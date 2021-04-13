@@ -17,22 +17,22 @@ import com.dari.model.Message;
 import com.dari.service.MessagesService;
 
 @RestController
-@RequestMapping("/App/clientArea/profil")
+@RequestMapping("/App/clientarea")
 public class MessagesController {
 	
 	@Autowired
 	private MessagesService messagesService ; 
 	
 	@PostMapping("/sendTo")
-	public String sending(@RequestHeader String Authorization ,@RequestBody Message message) {
-		String token = Authorization.replaceFirst("Bearer ", "");
+	public String sending(@RequestHeader String Authorizations ,@RequestBody Message message) {
+		String token = Authorizations.replaceFirst("Bearer ", "");
 		messagesService.sendMessage(token, message);
 		return "Your message was sent with success";
 	}
 	
 	@GetMapping("/Messages")
-	public Message retrieve(@RequestHeader String Authorization) {
-		String token = Authorization.replaceFirst("Bearer ", "");
+	public Message retrieve(@RequestHeader String Authorizations) {
+		String token = Authorizations.replaceFirst("Bearer ", "");
 		List<Message> messages = messagesService.getAllUserMessages(token); 
 		return (Message) messages ; 
 	}
@@ -44,8 +44,8 @@ public class MessagesController {
 	}
 	
 	@GetMapping("/Messages/{id}")
-	public String reply(@RequestHeader String Authorization,@PathVariable long id,@RequestBody Message message) {
-		String token = Authorization.replaceFirst("Bearer ", "");
+	public String reply(@RequestHeader String Authorizations,@PathVariable long id,@RequestBody Message message) {
+		String token = Authorizations.replaceFirst("Bearer ", "");
 		messagesService.Reply(token, message, id);
 		return "Message Deleted";
 	}
