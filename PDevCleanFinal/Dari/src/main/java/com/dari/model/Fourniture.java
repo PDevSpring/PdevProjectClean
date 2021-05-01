@@ -8,7 +8,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,14 +41,29 @@ public class Fourniture {
 	
 	
 	private float Price ;
-	
+		
+	private long usercard;
 
 	private String pubDate;
 	
 	private String Image1 ; 
 	private String Image2 ;
 	
+	@JsonIgnore
+	@OneToOne
+	private User user;
 	
-	} 
+
+	@JsonIgnore
+	@ManyToOne
+	private Delivery delivery;
+	
+	@JsonIgnore
+	@ManyToOne
+	private Cart cart;
+	
+	}
+
+
 
 

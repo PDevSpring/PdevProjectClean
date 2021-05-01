@@ -12,22 +12,26 @@ import org.springframework.stereotype.Service;
 import com.dari.model.Fourniture;
 import com.dari.model.FournitureType;
 import com.dari.repository.FournitureRepository;
+import com.dari.repository.UserRepository;
 
 @Service
 public class FournitureServiceImpl implements FournitureService {
 
 	@Autowired
 	FournitureRepository fourrep;
+	@Autowired
+	UserRepository userrep;
 
 	@Override
-	public long AddFour(Fourniture f) {
+	public Fourniture AddFour(Fourniture f,Long userid) {
 		FournitureType type = null;
 		f.setType(type.Dispo);
+		f.setUser(userrep.findById(userid).get());
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
 	     f.setPubDate(dateFormat.format(date));
 		fourrep.save(f);
-		return f.getFournitureId();
+		return f;
 	}
 	
 	@Override

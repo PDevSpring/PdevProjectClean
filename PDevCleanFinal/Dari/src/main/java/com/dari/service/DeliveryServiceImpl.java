@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dari.model.Delivery;
+import com.dari.repository.CartRepository;
 import com.dari.repository.DeliveryRepository;
 
 @Service
@@ -11,6 +12,8 @@ public class DeliveryServiceImpl implements DeliveryService {
 	
 	@Autowired 
 	DeliveryRepository delrep;
+	@Autowired 
+	CartRepository cartrep;
 	
 	@Override
 	public	Delivery adddelivery(Delivery del)

@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dari.model.FournitureType;
+import com.dari.model.Cart;
+import com.dari.model.Delivery;
 import com.dari.model.Fourniture;
+import com.dari.service.CartService;
+import com.dari.service.DeliveryService;
 import com.dari.service.FournitureService;
 
 @RestController
@@ -24,17 +28,18 @@ public class FournitureController {
 	@Autowired
 	private	FournitureService fourservice;
 	
-	@GetMapping("/test")
-	public String test() {
-		return "working fine ! " ; 
-	}
+	@Autowired
+	private	CartService cartservice;
+	
+	
+	
 
 	
-	@PostMapping("/addfour")
+	@PostMapping("/addfour/{userid}")
 	@ResponseBody
-	public Fourniture addfour(@RequestBody Fourniture f )
+	public Fourniture addfour(@RequestBody Fourniture f ,@PathVariable("userid") Long usrid)
 	{
-		fourservice.AddFour(f);
+		fourservice.AddFour(f,usrid);
 		return f;
 	}
 	
@@ -80,4 +85,56 @@ public class FournitureController {
 		return fourservice.BuyFourniturebyid(fid);
 		
 	}
+	//----------------------------------------------------------------------------
+	
+	@PostMapping("/createcart/{userid}")
+	@ResponseBody
+	public Cart createcart(@PathVariable("userid") Long usrid)
+	{ 	Cart c = new Cart();
+		cartservice.createCart(c, usrid);
+		return c;
+	}
+
+	@PostMapping("/addcart/{cartid}/{fourid}")
+	@ResponseBody
+	public Cart addtcart(@PathVariable("cartid") Long cid,@PathVariable("fourid") Long fid)
+	{
+		Cart c=cartservice.addtocart(fid, cid);
+		return c;
+	}
+
+	@PostMapping("/removefcart/{cartid}/{fourid}")
+	@ResponseBody
+	public Cart removetcart(@PathVariable("cartid") Long cid
+			 								,@PathVariable("fourid") Long fid)
+	{
+		return cartservice.removefromcart(fid, cid);
+	
+	}
+	
+
+	@PostMapping("/buycart/{cartid}")
+	@ResponseBody
+	public Delivery buytcart(@RequestBody Delivery del ,@PathVariable("cartid") Long cid)
+	{
+		
+		String add=del.getAdress();
+		String inf=del.getMoreinfo();
+		
+		return cartservice.buyfromcart(add,inf,cid);
+	
+	}
+	
+	@PostMapping("/shiporder/{delid}")
+	@ResponseBody
+	public Delivery buytcart(@PathVariable("delid") Long did)
+	{
+		
+		return cartservice.shippedorder(did);
+		
+
+	}
+	
+
 }
+

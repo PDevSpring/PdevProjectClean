@@ -7,8 +7,6 @@ import com.dari.model.FournitureType;
 
 public interface FournitureService {
 
-	long AddFour(Fourniture f);
-
 	void deleteFour(long FournitureId);
 
 	Fourniture findFourniture(long FournitureId);
@@ -16,6 +14,10 @@ public interface FournitureService {
 	public List<Fourniture> getallfourniture();
 
 	Fourniture BuyFourniturebyid(long fid);
+
+	Fourniture AddFour(Fourniture f, Long userid);
+
+
 
 	
 	  

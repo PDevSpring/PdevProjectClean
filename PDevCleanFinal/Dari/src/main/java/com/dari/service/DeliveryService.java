@@ -10,6 +10,7 @@ public interface DeliveryService {
 
 	Delivery modadressdelivery(Long iddel, String adr);
 
+	
 	Delivery adddelivery(Delivery del);
 
 }
