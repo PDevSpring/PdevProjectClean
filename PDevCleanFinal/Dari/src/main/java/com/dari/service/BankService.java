@@ -10,7 +10,7 @@ public interface BankService  {
 
 	void addbank(Bank bank);
 	
-	Bank updateBank (Bank bank);
+	Bank updateBank (Long bankID,Bank bank);
 	
 	void deleteBankByID(Long bankID);
 	
@@ -25,5 +25,9 @@ public interface BankService  {
 	Agent getagentbynamebank(String namebank);
 
 	void addagent(Agent agent, Long idbank);
+
+	List<Agent> getAllagents();
+
+	void deleteAgentByID(Long agentID);
 
 }
