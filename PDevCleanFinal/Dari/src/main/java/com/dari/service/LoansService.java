@@ -17,7 +17,7 @@ public interface LoansService {
 
 	LoansSimulationBank getLoansById(Long id);
 
-	void deleteLoanById(Long id);
+	LoansSimulationBank deleteLoanById(Long id);
 
 	void confirmLoan(Long idloan);
 
@@ -29,6 +29,8 @@ public interface LoansService {
 
 
 	LoansSimulationBank simulate(String nameBank, int nbrAnnee, long idad, double salaire);
+
+	
 
 
 

@@ -1,6 +1,10 @@
 package com.dari.service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.mail.MessagingException;
 
@@ -78,6 +82,7 @@ public class LoansServiceImpl implements LoansService {
 		user=userRepository.findById(iduser).get();
 		//agent=bankservice.getagentbynamebank(namebank);
 		simulation.setUser(user);
+		simulation.setAgent(agent);
 		simulation.setStatus("IN_PROGRESS");
 		
 
@@ -91,10 +96,14 @@ public class LoansServiceImpl implements LoansService {
 
 	
 
-	@Override
-	public void deleteLoanById(Long id) {
-		LoansSimulationBank loan= loanRepository.findById(id).get();
-		loanRepository.delete(loan);
+
+	public LoansSimulationBank deleteLoanById(Long id) {
+		LoansSimulationBank l=loanRepository.findById(id).get();
+		l.setAgent(null);
+		l.setBank(null);
+		l.setUser(null);
+		loanRepository.delete(l);
+		return l;
 	}	
 		
 	@Override
@@ -102,6 +111,9 @@ public class LoansServiceImpl implements LoansService {
 		
 		LoansSimulationBank simulation=loanRepository.findById(idloan).get();
 		simulation.setStatus("CONFIRMED");
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date(System.currentTimeMillis());
+		simulation.setStartedDate(formatter.format(date));
 		loanRepository.save(simulation);
 		
 	}

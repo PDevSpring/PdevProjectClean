@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,7 @@ import com.dari.service.MailService;
 import com.dari.service.PdfService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/App/Loan")
 public class LoansController {
@@ -131,10 +132,11 @@ public class LoansController {
 	// delete simulation by id
 	@DeleteMapping("/deleteById/{id}")
 	@ResponseBody 
-	public Long deleteSimulationById(@PathVariable("id") Long id )
+	public LoansSimulationBank deleteSimulationById(@PathVariable("id") Long id )
 	{
-			loanservice.deleteLoanById(id);
-			return id;
+		System.out.println(id);
+		return loanservice.deleteLoanById(id);
+			
 	}
 	
 	// confirm simulation by id
