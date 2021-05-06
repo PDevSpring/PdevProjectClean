@@ -224,8 +224,8 @@ public class MailServiceImpl implements MailService {
 				+ user.getUserName() + " from our client Mr" + 
 						" " + user.getFirstName() +" "+user.getLastName()+ " and you find the attached simulation report </p>\n"
 				+ "                        <p>If you wanted to answer it click on this link: .</p>\n"
-				+ "                      <h5>link <a href=\\\"http://htmlemail.io\\\">Confirm</a>  " + "</h5>"
-				+ "                      <h5>link <a href=\\\"http://htmlemail.io\\\">Unconfirm</a>" + "</h5>"
+				+ "                      <h5>link <a href=\"http://localhost:4200/Session/Connected!1/Home/Agent/Confirm\">see details here!</a>  " + "</h5>"
+
 				+ "                        <p>Thanks.</p>\n"
 				+ "                        <p>Have a good day! DARI IMMOBILIER Group.</p>\n"
 				+ "                      </td>\n" + "                    </tr>\n" + "                  </table>\n"
@@ -252,7 +252,7 @@ public class MailServiceImpl implements MailService {
 	
 		//
 		helper.setTo(agent.getEmail());
-		helper.setSubject("Requestiong simulation /");
+		helper.setSubject("Requestiong simulation from : "+user.getFirstName());
 		helper.setText(messaage, messaage);
 		//helper.setText("hello "+user.getFirstName()+" here is your loan simulation file");
 
