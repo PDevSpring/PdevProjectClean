@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,17 +23,18 @@ public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long CartId ; 
+	public long CartId ; 
 	
-	private float TotalPrice ;
+	public float TotalPrice ;
+	
 	
 	@OneToMany
-	private List<Fourniture> fournitures;
+	public List<Fourniture> fournitures;
 	
 	
 	
 	@OneToOne
-	private User user;
+	public User user;
 
 }
 

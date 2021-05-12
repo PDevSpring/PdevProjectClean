@@ -28,39 +28,39 @@ public class Fourniture {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "F_ID")
-	private long FournitureId ;
+	public long FournitureId ;
 	
 	@Column(name = "quantity", nullable = false)
-	 private Integer quantity;
+	public Integer quantity;
 	 
 	@Enumerated(EnumType.STRING)
-	private FournitureType type;
+	public FournitureType type;
 	
 	
-	private String Description ; 
+	public String Description ; 
 	
 	
-	private float Price ;
+	public float Price ;
 		
-	private long usercard;
+	public long usercard;
 
-	private String pubDate;
+	public String pubDate;
 	
-	private String Image1 ; 
-	private String Image2 ;
+	public String Image1 ; 
+	public String Image2 ;
 	
 	@JsonIgnore
 	@OneToOne
-	private User user;
+	public User user;
 	
 
 	@JsonIgnore
 	@ManyToOne
-	private Delivery delivery;
+	public Delivery delivery;
 	
 	@JsonIgnore
 	@ManyToOne
-	private Cart cart;
+	public Cart cart;
 	
 	}
 

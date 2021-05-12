@@ -27,7 +27,7 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository ; 
 
-	
+	/*
 	@PostMapping("/adminArea/registerAdmin")
 	public String RegisterAdmin(@RequestBody User user) {
 		userService.addAdmin(user);
@@ -74,7 +74,7 @@ public class UserController {
 	@GetMapping("/profil/logout")
 	public String Logout() {
 		return "Logged out From Account ! ";
-	}
+	}*/
 	
 	
 }

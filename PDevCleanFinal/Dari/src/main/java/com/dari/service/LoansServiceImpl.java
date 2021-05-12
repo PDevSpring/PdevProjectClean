@@ -139,15 +139,17 @@ public class LoansServiceImpl implements LoansService {
 @Override
 public LoansSimulationBank simulate(String nameBank, int nbrAnnee, long idad, double salaire) {
 	
-	System.out.println("lalala");
-
 	LoansSimulationBank simulation= new LoansSimulationBank();
 	
+
 	Bank bank=bankRepository.findByNamebank(nameBank);
 	
 	Ads ad=adsRepository.findByAdID(idad);
+	System.out.println("name"+nameBank);
+	System.out.println("years"+ nbrAnnee);
+	System.out.println("id"+ idad);
 	System.out.println("pirce"+ ad.getPrice());
-
+	System.out.println("sal"+ salaire);
 //	User user=userRepository.getClientByCin(cin);
 //	simulation.setUser(user);	
 	
@@ -211,7 +213,6 @@ public double calculMensualite(Ads Ads,Bank bank,int years)
 {
 	double tauxMensuel=calculTauxMensuel(bank);
 	System.out.println("taux  "+ tauxMensuel);
-	System.out.println("price  "+ Ads.getAdID());
 	double interet = Ads.getPrice() * tauxMensuel;
 	System.out.println("interet"+ interet);
 	double nbrecheance=calculNbrEcheance(years)*(-1);

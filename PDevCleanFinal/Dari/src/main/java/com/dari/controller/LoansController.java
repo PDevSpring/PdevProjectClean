@@ -125,7 +125,8 @@ public class LoansController {
 	//get all simulations by bank 
 	@GetMapping("/getAllloansBynameBank/{nameBank}")
     @ResponseBody
-	public List<LoansSimulationBank> getAllSimulationsByNameBank(@PathVariable("nameBank") String nameBank ) {	
+	public List<LoansSimulationBank> getAllSimulationsByNameBank(@PathVariable("nameBank") String nameBank ) {
+		System.out.println(nameBank);
 		return loanservice.getAllLoansByNameBank(nameBank);
 	}
 	

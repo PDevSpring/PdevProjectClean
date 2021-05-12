@@ -33,18 +33,18 @@ public class Delivery {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "DEL_ID")
-	private long deliveryId;
+	public long deliveryId;
 	
-	private float Price;
-	private String moreinfo;
+	public float Price;
+	public String moreinfo;
 	
-	private String adress;
+	public String adress;
 	@Enumerated(EnumType.STRING)
-	private OrderStatus orderstatus;
+	public OrderStatus orderstatus;
 	
 	@ManyToOne
-	private User user;
+	public User user;
 	
 	@OneToMany
-	private List<Fourniture> fournituress;
+	public List<Fourniture> fournituress;
 }

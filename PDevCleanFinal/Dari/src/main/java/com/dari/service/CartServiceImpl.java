@@ -10,6 +10,7 @@ import com.dari.model.Cart;
 import com.dari.model.Delivery;
 import com.dari.model.Fourniture;
 import com.dari.model.OrderStatus;
+import com.dari.model.User;
 import com.dari.repository.CartRepository;
 import com.dari.repository.DeliveryRepository;
 import com.dari.repository.FournitureRepository;
@@ -25,6 +26,7 @@ public class CartServiceImpl implements CartService {
 	
 	@Autowired
 	FournitureRepository fourrep;
+	
 	@Autowired
 	UserRepository userrep;
 	@Autowired 
@@ -41,41 +43,87 @@ public class CartServiceImpl implements CartService {
 		return cartrep.save(c);
 	}
 	
+	@Override
+	public List<Fourniture> getfourniturescart (Long cardid)
+	{
+		
+		Cart c=cartrep.findById(cardid).get();
+		List<Fourniture> list =  c.getFournitures();
+		return list;
+
+	}
+	
+	@Override
+	public Cart getcart(Long cardid)
+	{
+		
+		Cart c=cartrep.findById(cardid).get();
+		
+		return c;
+
+	}
+	
+	public Cart getcartbyuser(Long user)
+	{
+		Cart found = null;
+		User u = userrep.findById(user).get();
+		List <Cart> carts= (List<Cart>) cartrep.findAll();
+		for(Cart c : carts) {
+			if(c.getUser().getId()== u.getId())
+				{
+				found=c;
+				}
+		
+				else 
+				{
+					return null;
+				}
+		}
+		return found;
+		
+	}
+	
 	@Override 
 	public Cart addtocart (Long fournitureID,Long CartID)
 	{
 		Cart c=cartrep.findById(CartID).get();
-		
+
 		Fourniture f= fourrep.findById(fournitureID).get();
-		f.setCart(c);
-		List <Fourniture> fours = c.getFournitures();
 		
-		fours.add(f);
+			f.setCart(c);
+			List <Fourniture> fours = c.getFournitures();
+			
+			fours.add(f);
 		
-		c.setFournitures(fours);
-	
+			c.setFournitures(fours);
 		
-		float tprice=c.getTotalPrice();
-			c.setTotalPrice(tprice+ f.getPrice());
-		return cartrep.save(c);
+			
+			float tprice=c.getTotalPrice();
+			c.setTotalPrice(tprice+ (f.getPrice()));
+			return cartrep.save(c);
+		
+		
 	}
 	
 	@Override 
 	public Cart removefromcart (Long fournitureID,Long CartID)
 	{
+		
 		Cart c=cartrep.findById(CartID).get();
+		
 		
 		List<Fourniture> list =  c.getFournitures();
 		
 		Fourniture fremove= fourrep.findById(fournitureID).get();
 		
+
 	if(list.size()!=1) {
 		for(Fourniture f:list  ) {
 			
 			if(f.equals(fremove)) {
 				
 				int fr=list.indexOf(f);
-				c.setTotalPrice(c.getTotalPrice()-f.getPrice()); 
+				c.setTotalPrice(c.getTotalPrice()-(f.getPrice())); 
 				list.remove(fr);
 				f.setCart(null);
 			}
@@ -128,6 +176,9 @@ public class CartServiceImpl implements CartService {
 		
 		return del;
 	}
+	
+	
+	
 	
 
 	

@@ -46,9 +46,6 @@ public class FournitureServiceImpl implements FournitureService {
 	@Override
 	public List<Fourniture> getallfourniture(){
 		List<Fourniture> fours = (List<Fourniture>) fourrep.findAll();
-		for(Fourniture f:fours  ) {
-			System.out.println(f);
-		}
 		return fours;
 	}
 	
@@ -59,11 +56,24 @@ public class FournitureServiceImpl implements FournitureService {
 	public Fourniture BuyFourniturebyid (long fid) {
 		FournitureType type = null;
 		Fourniture four = findFourniture(fid);
-		if(four.getType() == type.Dispo){
+		if(four.getType() == type.Dispo)
+		{
+			if( four.getQuantity() == 1) 
+			{
+			four.setQuantity(0);
 			four.setType(type.NotDispo);
 			fourrep.save(four);
-			return four;
 			}
+			
+			if( four.getQuantity() > 1) 
+			{
+			four.setQuantity(four.getQuantity()-1);
+			fourrep.save(four);
+			}
+		
+		return four;
+		}
+			
 			else
 			{
 				return null ;

@@ -1,5 +1,7 @@
 package com.dari.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,11 @@ public class DeliveryServiceImpl implements DeliveryService {
 		delrep.deleteById(iddel);
 	}
 	
+	@Override 
+	public List<Delivery> getalldeleviry  ()
+	{
+		return (List<Delivery>) delrep.findAll();
+		
+	}
 	
 }
