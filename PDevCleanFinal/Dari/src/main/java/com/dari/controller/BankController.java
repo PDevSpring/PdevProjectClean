@@ -25,7 +25,6 @@ import com.dari.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @CrossOrigin(origins = "*")
-
 @RestController
 @RequestMapping ("/App/Bank")
 public class BankController {

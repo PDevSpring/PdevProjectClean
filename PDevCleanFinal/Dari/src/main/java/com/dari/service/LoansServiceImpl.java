@@ -123,6 +123,8 @@ public class LoansServiceImpl implements LoansService {
 		
 		LoansSimulationBank simulation=loanRepository.findById(idloan).get();
 		simulation.setStatus("DENIED");
+		simulation.setStartedDate(null);
+
 		loanRepository.save(simulation);
 		
 	}

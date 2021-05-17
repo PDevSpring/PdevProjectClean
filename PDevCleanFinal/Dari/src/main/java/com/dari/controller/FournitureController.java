@@ -78,6 +78,13 @@ public class FournitureController {
 		return fourservice.findFourniture(FournitureId).getPrice();
 	}
 	
+	@GetMapping("/getfourownerbyid/{userid}")
+	@ResponseBody
+	public List<Fourniture> getfourownerbyid(@PathVariable ("userid") Long uid )
+	{
+		return cartservice.getcartbyuser(uid).getFournitures();
+	}
+	
 	@GetMapping("/getfourstatusbyid/{fourid}")
 	@ResponseBody
 	public FournitureType getfourstatusebyid(@PathVariable ("fourid") Long FournitureId )
