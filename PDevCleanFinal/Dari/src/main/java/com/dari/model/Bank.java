@@ -44,7 +44,7 @@ public class Bank {
 
 	public float margeInteretbank;
 
-	private float taux;
+	public float taux;
 	
 
 	@JsonIgnore

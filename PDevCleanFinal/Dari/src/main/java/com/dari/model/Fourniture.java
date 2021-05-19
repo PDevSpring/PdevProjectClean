@@ -1,14 +1,17 @@
 package com.dari.model;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,28 +26,43 @@ public class Fourniture {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "F_ID")
-	private long FournitureId ;
+	public long FournitureId ;
 	
 	@Column(name = "quantity", nullable = false)
-	 private Integer quantity;
+	public Integer quantity;
 	 
-	@Enumerated(EnumType.STRING)
-	private FournitureType type;
+	public boolean type;
 	
 	
-	private String Description ; 
+	public String Description ; 
+	public String Name ; 
 	
 	
-	private float Price ;
-	
+	public float Price ;
+		
+	public long usercard;
 
-	private String pubDate;
+	public String pubDate;
+	//mappedBy = "fourniture")
+
+    @OneToOne
+    @JsonIgnore
+	public FileDB image;
 	
-	private String Image1 ; 
-	private String Image2 ;
+	@JsonIgnore
+	@OneToOne
+	public User user;
+
+	@JsonIgnore
+	@ManyToOne
+	public Delivery delivery;
 	
+	@JsonIgnore
+	@ManyToOne
+	public Cart cart;
 	
-	} 
+	}
+
+
 
 

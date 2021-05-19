@@ -39,18 +39,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable();
-	/*	httpSecurity.csrf().disable().sessionManagement()
+		httpSecurity.csrf().disable().sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and()
 				.authorizeRequests()
 				 .antMatchers("/home/*").permitAll()
-				 .antMatchers("/App/*").hasAnyRole("Client","Admin")
-				 .antMatchers("/App/adminArea/*").hasRole("Admin")
+				 .antMatchers("/App/**").hasAnyRole("Client","Admin")
+				 .antMatchers("/App/adminArea/**").hasRole("Admin")
 						.anyRequest().authenticated().and().
 						exceptionHandling();
 		httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-*/
 	}
     @Bean
     public PasswordEncoder passwordEncoder() {

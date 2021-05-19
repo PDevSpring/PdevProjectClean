@@ -1,13 +1,14 @@
 package com.dari.service;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.dari.model.FileDB;
 import com.dari.model.Fourniture;
-import com.dari.model.FournitureType;
 
 public interface FournitureService {
-
-	long AddFour(Fourniture f);
 
 	void deleteFour(long FournitureId);
 
@@ -16,6 +17,20 @@ public interface FournitureService {
 	public List<Fourniture> getallfourniture();
 
 	Fourniture BuyFourniturebyid(long fid);
+
+	Fourniture AddFour(Fourniture f, Long userid);
+
+	FileDB store(Fourniture f, MultipartFile file) throws IOException;
+
+	FileDB getim(Long id);
+
+	FileDB saveImage(FileDB p);
+
+	Fourniture updateFourniture(Fourniture four);
+
+	List<Fourniture> getOwner(Long userid);
+
+
 
 	
 	  

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,7 @@ public class LoginController {
 	private UserDetService userDetailsService ; 
 	
 	
-	@GetMapping("/Login")
+	@PostMapping("/Login")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest loginRequest) throws Exception {
 
 		authenticate(loginRequest.getUsername(), loginRequest.getPassword());
@@ -59,13 +60,13 @@ public class LoginController {
 	}
 	
 	
-	@GetMapping("/register")
+	@PostMapping("/register")
 	public String RegisterClient(@RequestBody User user) {
 		userService.addClient(user);
 		return "RegistrationDone! ";
 	}
 	
-	@GetMapping("/Verif/{token}")
+	@GetMapping("/{token}")
 	public String VerifAccount(@PathVariable String token) {
 		userService.verifyAccount(token);
 		return "Account Confirmed"; 

@@ -19,6 +19,8 @@ public interface UserService  {
 	String DeleteAccount(long id);
 	
 	void verifyAccount(String token);
+
+	String UpdateAccount(long id, User user);
 	
 	
 	

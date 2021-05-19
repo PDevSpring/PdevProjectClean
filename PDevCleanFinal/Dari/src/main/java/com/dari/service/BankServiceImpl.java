@@ -25,6 +25,12 @@ public class BankServiceImpl implements BankService {
 		return bank ; 
 	}
 	
+	@Override
+	public List<Agent> getAllagents() {
+		List<Agent> agents = (List<Agent>) agentRepository.findAll();
+		return agents ; 
+	}
+	
 	
 	public void addbank(Bank bank) {
 	
@@ -35,14 +41,29 @@ public class BankServiceImpl implements BankService {
 	}
 	
 	
-	public Bank updateBank (Bank bank) {
-		return bankRepository.save(bank);
+	public Bank updateBank (Long bankID,Bank bank) {
+		Bank oldbank = bankRepository.findById(bankID).get();
+		
+		oldbank.setTaux(bank.taux);
+		oldbank.setDescbank(bank.descbank);
+		oldbank.setMargeInteretbank(bank.margeInteretbank);
+		oldbank.setAdressbank(bank.adressbank);
+		oldbank.setNamebank(bank.namebank);
+		
+		return bankRepository.save(oldbank);
 	}
 	
 	@Override
 	public void deleteBankByID(Long bankID) {
 		Bank bank = bankRepository.findById(bankID).get();
 		bankRepository.delete(bank);
+		
+	}
+	
+	@Override
+	public void deleteAgentByID(Long agentID) {
+		Agent agent = agentRepository.findById(agentID).get();
+		agentRepository.delete(agent);
 		
 	}
 	

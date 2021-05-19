@@ -30,6 +30,26 @@ public class MailServiceImpl implements MailService {
 
 	}
 	
+	public void Sendd(String toEmail,String Subject,String Body) throws MailException {
+
+		/*
+		 * This JavaMailSender Interface is used to send Mail in Spring Boot.
+		 * This JavaMailSender extends the MailSender Interface which contains
+		 * send() function. SimpleMailMessage Object is required because send()
+		 * function uses object of SimpleMailMessage as a Parameter
+		 */
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(toEmail);
+		mail.setFrom("daritn9@gmail.com");
+		mail.setSubject(Subject);
+		mail.setText(Body);
+
+		
+		javaMailSender.send(mail);
+	}
+
+	
 	@Override
 	public void Send(User user) throws MailException {
 
@@ -204,8 +224,8 @@ public class MailServiceImpl implements MailService {
 				+ user.getUserName() + " from our client Mr" + 
 						" " + user.getFirstName() +" "+user.getLastName()+ " and you find the attached simulation report </p>\n"
 				+ "                        <p>If you wanted to answer it click on this link: .</p>\n"
-				+ "                      <h5>link <a href=\\\"http://htmlemail.io\\\">Confirm</a>  " + "</h5>"
-				+ "                      <h5>link <a href=\\\"http://htmlemail.io\\\">Unconfirm</a>" + "</h5>"
+				+ "                      <h5>link <a href=\"http://localhost:4200/Session/Connected!1/Home/Agent/Confirm\">see details here!</a>  " + "</h5>"
+
 				+ "                        <p>Thanks.</p>\n"
 				+ "                        <p>Have a good day! DARI IMMOBILIER Group.</p>\n"
 				+ "                      </td>\n" + "                    </tr>\n" + "                  </table>\n"
@@ -232,7 +252,7 @@ public class MailServiceImpl implements MailService {
 	
 		//
 		helper.setTo(agent.getEmail());
-		helper.setSubject("Requestiong simulation /");
+		helper.setSubject("Requestiong simulation from : "+user.getFirstName());
 		helper.setText(messaage, messaage);
 		//helper.setText("hello "+user.getFirstName()+" here is your loan simulation file");
 

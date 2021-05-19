@@ -13,4 +13,6 @@ public interface MailService {
 
 	void sendWithAttachment(User user, Agent agent, String attachement) throws MailException, MessagingException;
 
+	void Sendd(String email, String body, String subject);
+
 }

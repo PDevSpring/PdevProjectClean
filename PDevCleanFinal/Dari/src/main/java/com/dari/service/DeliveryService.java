@@ -1,5 +1,7 @@
 package com.dari.service;
 
+import java.util.List;
+
 import com.dari.model.Delivery;
 
 public interface DeliveryService {
@@ -10,6 +12,13 @@ public interface DeliveryService {
 
 	Delivery modadressdelivery(Long iddel, String adr);
 
+	
 	Delivery adddelivery(Delivery del);
+
+	List<Delivery> getalldeleviry();
+
+	List<Delivery> finddeliverybyuserid(Long iduser);
+
+	Delivery getownertodeliver(Long fid);
 
 }

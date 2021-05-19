@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,39 +26,41 @@ public class LoansSimulationBank {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDloan")
-	private long IdLoan;
+	public long IdLoan;
 	
-	private double Taux;
+	public double Taux;
 	
-	private double Mensuel;
+	public double Mensuel;
 	
-	private double CapaciteRembouresement;
+	public double CapaciteRembouresement;
 	
-	private double Interet;
+	public double Interet;
 	
-	private double Interetall;
+	public double Interetall;
 	
-	private double Mensualite;
+	public double Mensualite;
 	
-	private double Principale;
+	public double Principale;
 	
-	private double MontantRemb;
+	public double MontantRemb;
 	
-	private double Prixprod;
+	public double Prixprod;
 	
-	private double Salaire;
+	public double Salaire;
 	
-	private String Status;
+	public String Status;
 	
-	private Date StartedDate;
+	public String StartedDate;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	Bank bank;
 	
+	@JsonIgnore
 	@ManyToOne
 	User user;
 	
+	@JsonIgnore
 	@ManyToOne
 	Agent agent;
 }

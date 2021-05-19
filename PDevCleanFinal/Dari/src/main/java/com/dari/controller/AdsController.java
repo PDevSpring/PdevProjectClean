@@ -29,6 +29,12 @@ public class AdsController {
 	@Autowired
 	private AdsService adService ; 
 	
+	
+	@GetMapping("/test")
+	public String test() {
+		return "working fine ! " ; 
+	}
+	
 	@GetMapping("/ads")
 	  List<Ads> all() {
 	    return (List<Ads>) adService.findAllad();

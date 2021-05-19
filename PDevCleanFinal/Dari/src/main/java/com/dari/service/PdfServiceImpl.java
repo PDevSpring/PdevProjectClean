@@ -82,7 +82,7 @@ public class PdfServiceImpl implements PdfService {
 		bank.setAlignment(Element.ALIGN_LEFT);
 		
 		Image imgBank = null;
-			imgBank = Image.getInstance("C:\\Users\\pc rog\\Desktop\\2x\\dari.png");
+			imgBank = Image.getInstance("C:\\Users\\pc rog\\Desktop\\2x\\dari.png.png");
 		
 		imgBank.setAbsolutePosition(260, 767);
 		imgBank.scalePercent(10);
