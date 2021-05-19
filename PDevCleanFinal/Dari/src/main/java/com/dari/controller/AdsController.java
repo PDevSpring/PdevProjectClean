@@ -1,24 +1,29 @@
 package com.dari.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
 import com.dari.model.Ads;
+import com.dari.model.Typeads;
 import com.dari.service.AdsService;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/App/Ads")
+@RequestMapping("/App")
+
 public class AdsController {
 	
 	@Autowired
@@ -29,10 +34,10 @@ public class AdsController {
 	    return (List<Ads>) adService.findAllad();
 	  }
     
-	@PostMapping ("/newad")
+	@PostMapping ("/newad/{userid}")
 	@ResponseBody
-	Ads newad (@RequestBody Ads newad) {
-		return adService.addnewad(newad);
+	Ads newad (@RequestBody Ads newad,@PathVariable("userid") Long userid) {
+		return adService.addnewad(newad,userid);
 	}
 	
 	@DeleteMapping("/deletead/{ID}")
@@ -97,6 +102,12 @@ public class AdsController {
 	  public int nbrdislike() {
 	    return adService.nbrdislike();
 	  }
+	
+	@GetMapping("/filter")
+	@ResponseBody
+	public List<Ads> filterAds(@RequestParam String location, @RequestParam float price, @RequestParam int nbRooms, @RequestParam Typeads kindofgood ) {
+	    return adService.filterAds(location, price, nbRooms, kindofgood);
+	}
 
 
 	  

@@ -16,4 +16,7 @@ public interface AppointmentService {
 
 	Appointment addAppointment(Appointment a, Long idAd);
 
+
+	List<Appointment> getappbyadid(Long id);
+
 }

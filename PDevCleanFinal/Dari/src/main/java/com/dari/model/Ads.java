@@ -1,5 +1,6 @@
 package com.dari.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -19,7 +20,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Ads {
+public class Ads implements Serializable{
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,7 +30,7 @@ public class Ads {
 	private String Object ; 
 	private String Description ; 
 	private String location ; 
-	private String ServiceType ; 
+	private type ServiceType ; 
 	@ElementCollection
 	private  List <String> image ;
 	private int RoomsNb ; 

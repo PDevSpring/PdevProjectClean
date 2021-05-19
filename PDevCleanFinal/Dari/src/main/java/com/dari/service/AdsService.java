@@ -1,8 +1,10 @@
 package com.dari.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dari.model.Ads;
+import com.dari.model.Typeads;
 
 public interface AdsService {
 
@@ -16,7 +18,6 @@ public interface AdsService {
 
 	Ads updatead(Ads ad);
 
-	Ads addnewad(Ads newad);
 
 	int nbrlike();
 
@@ -33,6 +34,11 @@ public interface AdsService {
 	int getnblikes(Long idad);
 
 	int getnbdislikes(Long idad);
+	
+
+	List<Ads> filterAds(String location, float price, int nbRooms, Typeads kindofgood);
+
+	Ads addnewad(Ads newad, Long userid); 
 
 
 }

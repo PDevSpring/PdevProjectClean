@@ -1,12 +1,16 @@
 package com.dari.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dari.model.Ads;
+import com.dari.model.Typeads;
 import com.dari.repository.AdsRepository;
+import com.dari.repository.UserRepository;
 
 
 
@@ -16,7 +20,8 @@ public class AdsServiceImpl implements AdsService {
 
 	@Autowired
 	private AdsRepository adsrepository;
-	
+	@Autowired
+	private UserRepository userrep;
 
 	
 	@Override
@@ -40,11 +45,12 @@ public class AdsServiceImpl implements AdsService {
 	@Override
 	public Ads findbyid(Long idad)
 	{
-		return adsrepository.findById(idad).get();
+		return adsrepository.findById(idad).orElse(null);
 	}
 
 	@Override
-	public Ads addnewad(Ads newad) {
+	public Ads  addnewad(Ads newad,Long userid) {
+		newad.setUser(userrep.findById(userid).get());
 		Ads ad = adsrepository.save (newad);
 		return ad;
 	}
@@ -122,8 +128,27 @@ public class AdsServiceImpl implements AdsService {
 		return ad;
 	}
 	
-
-	 
+	@SuppressWarnings("unlikely-arg-type")
+	@Override
+	public List<Ads> filterAds(String location, float price, int nbRooms, Typeads kindofgood ) {
+	    List<Ads> adsList = findAllad();
+	   
+	    if (location.equals("") == false) {
+	        adsList= adsList.stream().filter(ad -> ad.getLocation().equals(location)).collect(Collectors.toList());
+	    }
+	    if (price != 0) {
+	        adsList= adsList.stream().filter(ad -> ad.getPrice()==(price)).collect(Collectors.toList());
+	    }
+	    if (nbRooms != 0) {
+	        adsList= adsList.stream().filter(ad -> ad.getRoomsNb()>=(nbRooms)).collect(Collectors.toList());
+	    }
+	    if (kindofgood.equals("") == false) {
+	        adsList= adsList.stream().filter(ad -> ad.getKindofgood().equals(kindofgood)).collect(Collectors.toList());
+	    }
+	    return adsList;
+	}
+		 
+	 }
 	
 
-}
+

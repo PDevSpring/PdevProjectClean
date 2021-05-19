@@ -10,7 +10,9 @@ package com.dari.model;
 	import javax.persistence.Temporal;
 	import javax.persistence.TemporalType;
 
-	import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
 	import lombok.Data;
 	import lombok.NoArgsConstructor;
 
@@ -22,15 +24,17 @@ package com.dari.model;
 		
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private long AppointmentId ; 
+		private long AppointmentId;
 		@Temporal(TemporalType.DATE)
 		private Date date ;  
 		private String state;
 		private int Heure;
 		private String Attendance;
 		
+		@JsonIgnore
 		@ManyToOne
 		private User user;
+		@JsonIgnore
 		@ManyToOne
 		private Ads ad;
 	}
