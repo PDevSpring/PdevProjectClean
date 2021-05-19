@@ -1,10 +1,9 @@
 package com.dari.model;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,17 +26,16 @@ public class Fourniture {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "F_ID")
 	public long FournitureId ;
 	
 	@Column(name = "quantity", nullable = false)
 	public Integer quantity;
 	 
-	@Enumerated(EnumType.STRING)
-	public FournitureType type;
+	public boolean type;
 	
 	
 	public String Description ; 
+	public String Name ; 
 	
 	
 	public float Price ;
@@ -45,14 +43,15 @@ public class Fourniture {
 	public long usercard;
 
 	public String pubDate;
-	
-	public String Image1 ; 
-	public String Image2 ;
+	//mappedBy = "fourniture")
+
+    @OneToOne
+    @JsonIgnore
+	public FileDB image;
 	
 	@JsonIgnore
 	@OneToOne
 	public User user;
-	
 
 	@JsonIgnore
 	@ManyToOne

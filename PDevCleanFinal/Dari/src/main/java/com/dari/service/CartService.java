@@ -12,8 +12,6 @@ public interface CartService {
 	Cart createCart(Cart c, Long userID);
 
 
-	Delivery buyfromcart(String adress, String moreinf, Long CartID);
-
 	Delivery shippedorder(Long delID);
 
 	
@@ -30,6 +28,15 @@ public interface CartService {
 
 
 	Cart addtocart(Long fournitureID, Long CartID);
+
+
+	Delivery buyfromcart(float deliveryType, String adress, String moreinf, Long CartID);
+
+
+	List<Cart> findallcarts();
+
+
+	Cart causer(Long userid);
 
 
 

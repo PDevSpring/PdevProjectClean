@@ -17,4 +17,8 @@ public interface DeliveryService {
 
 	List<Delivery> getalldeleviry();
 
+	List<Delivery> finddeliverybyuserid(Long iduser);
+
+	Delivery getownertodeliver(Long fid);
+
 }

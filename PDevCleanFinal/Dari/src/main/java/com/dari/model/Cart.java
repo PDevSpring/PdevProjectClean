@@ -23,16 +23,16 @@ public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long CartId ; 
+	public long cartId ; 
 	
-	public float TotalPrice ;
+	public float totalPrice ;
 	
-	
+	@JsonIgnore
 	@OneToMany
 	public List<Fourniture> fournitures;
 	
 	
-	
+	@JsonIgnore
 	@OneToOne
 	public User user;
 

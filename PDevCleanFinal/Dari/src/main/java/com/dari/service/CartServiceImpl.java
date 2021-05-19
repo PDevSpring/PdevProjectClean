@@ -62,27 +62,59 @@ public class CartServiceImpl implements CartService {
 		return c;
 
 	}
+	@Override
+	public List<Cart> findallcarts(){
+		return (List<Cart>) cartrep.findAll();
+	}
 	
-	public Cart getcartbyuser(Long user)
+	
+	
+	@Override
+	public Cart getcartbyuser(Long userid)
 	{
+		System.out.println("aaaaaa");
+		User u = userrep.findById(userid).get();
+		System.out.println(u);
 		Cart found = null;
-		User u = userrep.findById(user).get();
-		List <Cart> carts= (List<Cart>) cartrep.findAll();
-		for(Cart c : carts) {
-			if(c.getUser().getId()== u.getId())
-				{
-				found=c;
-				}
-		
-				else 
-				{
-					return null;
-				}
+		List<Cart> ca =  findallcarts();
+		System.out.println(ca);
+		for(Cart c : ca) {
+			if((c.getUser().getId()) == u.getId())
+			{
+			found = c;
+			break;
+
+			}
+	
+			else 
+			{
+				
+
+				return null;
+
+			}
+	
 		}
+		System.out.println(found);
 		return found;
 		
 	}
 	
+	@Override
+	public Cart causer(Long userid)
+	{
+		User u = userrep.findById(userid).get();
+		List<Cart> all = (List<Cart>) cartrep.findAll();
+		Cart foun = null ;
+		for(Cart c : all) {
+			if(c.getUser().getId()==u.getId()) {
+				foun=c;
+			}else {
+				return null;
+			}}
+		return foun;
+		}
+
 	@Override 
 	public Cart addtocart (Long fournitureID,Long CartID)
 	{
@@ -136,7 +168,7 @@ public class CartServiceImpl implements CartService {
 	
 	
 	@Override 
-	public Delivery buyfromcart (String adress,String moreinf,Long CartID)
+	public Delivery buyfromcart (float deliveryType, String adress,String moreinf,Long CartID)
 	{
 		Delivery del=new Delivery();
 	
@@ -148,7 +180,11 @@ public class CartServiceImpl implements CartService {
 		del.setFournituress(list);
 		del.setAdress(adress);
 		del.setMoreinfo(moreinf);
-		del.setPrice(c.getTotalPrice());
+		del.setDeliverytype(deliveryType);
+
+		del.setPrice((c.getTotalPrice()+del.getDeliverytype()));
+		
+		
 		del.setUser(c.getUser());
 		del.setOrderstatus(o.Processing);
 		deliveryservice.adddelivery(del);
